@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Танчики Онлайн</title>
+  <meta name="description" content="Многопользовательские танчики прямо в браузере">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='5' width='7' height='24' fill='%23222'/><rect x='22' y='5' width='7' height='24' fill='%23222'/><rect x='9' y='8' width='14' height='20' fill='%234caf50'/><circle cx='16' cy='18' r='6' fill='%232e7d32'/><rect x='14' y='1' width='4' height='14' fill='%232e7d32'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <div id="menu" class="screen">
+    <div class="panel">
+      <h1>ТАНЧИКИ <span>ОНЛАЙН</span></h1>
+      <p class="sub">Сражайся с друзьями на одной карте прямо в браузере</p>
+
+      <label class="field">
+        <span>Позывной</span>
+        <input id="name" maxlength="16" placeholder="Танкист" autocomplete="off" spellcheck="false">
+      </label>
+
+      <div class="field">
+        <span>Цвет танка</span>
+        <div id="colors"></div>
+      </div>
+
+      <button id="play" class="btn">В БОЙ!</button>
+      <p id="online">&nbsp;</p>
+
+      <div class="help touch-help">
+        <div><kbd>Левая половина экрана</kbd><span>джойстик</span></div>
+        <div><kbd>ОГОНЬ</kbd><span>держать — стрелять</span></div>
+        <div><kbd>АВТО</kbd><span>автоматическая стрельба</span></div>
+        <div><kbd>⛶</kbd><span>полный экран</span></div>
+      </div>
+
+      <div class="help key-help">
+        <div><kbd>W A S D</kbd> или <kbd>← ↑ → ↓</kbd><span>движение</span></div>
+        <div><kbd>Пробел</kbd><span>огонь</span></div>
+        <div><kbd>Enter</kbd><span>чат</span></div>
+        <div><kbd>M</kbd><span>звук вкл/выкл</span></div>
+      </div>
+
+      <div class="legend">
+        <div><i style="--c:#ef5350">✚</i>Ремонт</div>
+        <div><i style="--c:#4fc3f7">◈</i>Щит</div>
+        <div><i style="--c:#ffca28">✦</i>Скорострельность</div>
+        <div><i style="--c:#66bb6a">➤</i>Ускорение</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="hud" hidden>
+    <div id="board">
+      <h3>Лидеры <span id="boardCount"></span></h3>
+      <ol id="boardList"></ol>
+    </div>
+    <div id="killfeed"></div>
+    <div id="toast"></div>
+
+    <div id="bottomLeft">
+      <div id="chatlog"></div>
+      <input id="chatInput" maxlength="120" placeholder="Сообщение… Enter — отправить, Esc — закрыть" autocomplete="off" hidden>
+      <div id="stats">
+        <div id="hearts"></div>
+        <div id="score"></div>
+        <div id="buffs"></div>
+        <div id="ping"></div>
+      </div>
+    </div>
+
+    <div id="dead" hidden>
+      <div class="title">ТАНК УНИЧТОЖЕН</div>
+      <div id="deadBy"></div>
+      <div id="respawn"></div>
+    </div>
+
+    <div id="touch" hidden>
+      <div id="stickZone">
+        <div id="stick"><div id="knob"></div></div>
+      </div>
+      <div id="fireBtn">ОГОНЬ</div>
+      <div id="autoBtn">АВТО<br>ОГОНЬ</div>
+      <div id="topBtns">
+        <button id="chatBtn" type="button" aria-label="Чат">💬</button>
+        <button id="soundBtn" type="button" aria-label="Звук">🔊</button>
+        <button id="fsBtn" type="button" aria-label="Полный экран">⛶</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lost" class="screen" hidden>
+    <div class="panel">
+      <h2>Связь с сервером потеряна</h2>
+      <button class="btn" onclick="location.reload()">Переподключиться</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
